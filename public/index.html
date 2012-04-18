@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:tuna="http://kononencheg.github.com/">
+<html xmlns:tuna>
     <head>
         <meta charset="utf-8" />
 
@@ -8,6 +8,8 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
     </head>
     <body>
+
+        <!-- Контетнт -->
 
         <div class="container">
             <div class="page-header">
@@ -23,37 +25,16 @@
                 <button type="submit" class="btn">Добавить</button>
             </form>
 
-            <div class="well">
+            <div class="j-template-transformer t-list-body hide well"
+                 data-name="todo-list"
+                 data-template-id="todo_list_template">
+
                 <div class="alert alert-error">
                     Осталось задач: <strong>3</strong>
                 </div>
 
-                <ul class="nav nav-list">
-                    <li>
-                        <a class="clearfix">
-                            <label class="checkbox pull-left">
-                                <input type="checkbox" /> Вернуться домой
-                            </label>
-                            <i class="icon-trash pull-right"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="clearfix">
-                            <label class="checkbox pull-left">
-                                <input type="checkbox" /> Покушать
-                            </label>
-                            <i class="icon-trash pull-right"></i>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="clearfix">
-                            <label class="checkbox pull-left">
-                                <input type="checkbox" /> Лечь спать
-                            </label>
-                            <i class="icon-trash pull-right"></i>
-                        </a>
-                    </li>
-                </ul>
+                <ul class="j-button-group t-list nav nav-list"
+                    data-name="task-controls"></ul>
 
                 <hr />
 
@@ -62,10 +43,52 @@
                 </button>
             </div>
 
-
         </div>
 
+        <!-- Шаблоны -->
 
+        <div class="j-isolator hide">
+
+            <tuna:template id="todo_list_template">
+                <tuna:if tuna:target=".t-list-body"
+                         tuna:path="list/length" tuna:eq="0"
+                         tuna:class="hide" />
+
+                <tuna:list tuna:target=".t-list"
+                           tuna:path="list"
+                           tuna:item-renderer-id="task_renderer"
+                           tuna:item-template-id="task_template"
+                           tuna:key-path="$key" />
+
+            </tuna:template>
+
+            <tuna:template id="task_template">
+                <tuna:spot tuna:target=".t-task-text" tuna:path="text" />
+                <tuna:checkbox tuna:target=".t-is-task-done" tuna:path="isDone" />
+
+                <tuna:attr tuna:name="data-task-index"
+                           tuna:target=".t-key-data"
+                           tuna:path="$key" />
+            </tuna:template>
+
+            <ul>
+                <li id="task_renderer">
+                    <a class="clearfix">
+                        <label class="j-button t-key-data checkbox pull-left"
+                               data-action="done"
+                               data-task-index="">
+
+                            <input type="checkbox" class="t-is-task-done" />
+                            <span class="t-task-text"></span>
+                        </label>
+                        <i class="j-button t-key-data icon-trash pull-right"
+                           data-action="remove"
+                           data-task-index=""></i>
+                    </a>
+                </li>
+            </ul>
+
+        </div>
 
 
         <!--[if IE]>
