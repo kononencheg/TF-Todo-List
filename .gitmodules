@@ -1,0 +1,3 @@
+[submodule "library/tuna"]
+	path = library/tuna
+	url = git@github.com:kononencheg/Tuna-Framework

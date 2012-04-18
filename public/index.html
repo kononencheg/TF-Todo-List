@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:tuna="http://kononencheg.github.com/">
+    <head>
+        <meta charset="utf-8" />
+
+        <title>Список задач</title>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="page-header">
+                <h1>
+                    Список задач
+                </h1>
+            </div>
+
+            <form class="well form-inline">
+                <input type="text" class="input" placeholder="Что нужно сделать?" />
+                <button type="submit" class="btn">Добавить</button>
+            </form>
+
+            <div class="well">
+                <div class="alert alert-error">
+                    Осталось задач: <strong>3</strong>
+                </div>
+
+                <ul class="nav nav-list">
+                    <li>
+                        <a class="clearfix">
+                            <label class="checkbox pull-left">
+                                <input type="checkbox" /> Вернуться домой
+                            </label>
+                            <i class="icon-trash pull-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="clearfix">
+                            <label class="checkbox pull-left">
+                                <input type="checkbox" /> Покушать
+                            </label>
+                            <i class="icon-trash pull-right"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="clearfix">
+                            <label class="checkbox pull-left">
+                                <input type="checkbox" /> Лечь спать
+                            </label>
+                            <i class="icon-trash pull-right"></i>
+                        </a>
+                    </li>
+                </ul>
+
+                <hr />
+
+                <button class="btn">
+                    Удалить выполненные (<span>0</span>)
+                </button>
+            </div>
+
+
+        </div>
+
+
+
+
+        <!--[if IE]>
+            <script type="text/javascript" src="js/json.js"></script>
+        <![endif]-->
+
+        <script type="text/javascript" src="js/sizzle.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+
+        <script type="text/javascript">
+            main(document.body);
+        </script>
+
+    </body>
+</html>
