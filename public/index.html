@@ -16,8 +16,10 @@
                 </h1>
             </div>
 
-            <form class="well form-inline">
-                <input type="text" class="input" placeholder="Что нужно сделать?" />
+            <form class="j-form well form-inline"
+                  data-name="add-task">
+
+                <input type="text" class="input" name="task" placeholder="Что нужно сделать?" />
                 <button type="submit" class="btn">Добавить</button>
             </form>
 
@@ -55,7 +57,7 @@
 
                 <hr />
 
-                <button class="btn">
+                <button class="j-button btn" data-name="remove-done-tasks">
                     Удалить выполненные (<span>0</span>)
                 </button>
             </div>

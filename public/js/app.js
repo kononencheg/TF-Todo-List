@@ -847,6 +847,21 @@ function $JSCompiler_StaticMethods_initModules$$($JSCompiler_StaticMethods_initM
     $i$$32$$++
   }
 }
+function $JSCompiler_StaticMethods_getModuleInstanceByName$$($JSCompiler_StaticMethods_getModuleInstanceByName$self_instances$$3$$, $i$$33_type$$74$$, $name$$73$$) {
+  var $l$$22_targetId$$2$$;
+  $l$$22_targetId$$2$$ = $l$$22_targetId$$2$$ || $JSCompiler_StaticMethods_getModuleInstanceByName$self_instances$$3$$.$_target$.id;
+  if($JSCompiler_StaticMethods_getModuleInstanceByName$self_instances$$3$$.$__instances$[$l$$22_targetId$$2$$] !== $JSCompiler_alias_VOID$$ && $JSCompiler_StaticMethods_getModuleInstanceByName$self_instances$$3$$.$__instances$[$l$$22_targetId$$2$$][$i$$33_type$$74$$] !== $JSCompiler_alias_VOID$$) {
+    $JSCompiler_StaticMethods_getModuleInstanceByName$self_instances$$3$$ = $JSCompiler_StaticMethods_getModuleInstanceByName$self_instances$$3$$.$__instances$[$l$$22_targetId$$2$$][$i$$33_type$$74$$];
+    $i$$33_type$$74$$ = 0;
+    for($l$$22_targetId$$2$$ = $JSCompiler_StaticMethods_getModuleInstanceByName$self_instances$$3$$.length;$i$$33_type$$74$$ < $l$$22_targetId$$2$$;) {
+      if($JSCompiler_StaticMethods_getModuleInstanceByName$self_instances$$3$$[$i$$33_type$$74$$].getName() === $name$$73$$) {
+        return $JSCompiler_StaticMethods_getModuleInstanceByName$self_instances$$3$$[$i$$33_type$$74$$]
+      }
+      $i$$33_type$$74$$++
+    }
+  }
+  return $JSCompiler_alias_NULL$$
+}
 function $JSCompiler_StaticMethods_destroyModules$$($JSCompiler_StaticMethods_destroyModules$self$$, $target$$43$$) {
   if($target$$43$$ === $JSCompiler_alias_VOID$$) {
     for(var $targetId$$3$$ in $JSCompiler_StaticMethods_destroyModules$self$$.$__instances$) {
@@ -1592,11 +1607,13 @@ $tuna$control$ViewController$$.prototype.$init$ = function $$tuna$control$ViewCo
   this.$destroy$();
   this.$_container$ = new $tuna$ui$ModuleContainer$$($target$$64$$);
   this.$_container$.$__modules$ = this.$_modules$;
-  $JSCompiler_StaticMethods_initModules$$(this.$_container$)
+  $JSCompiler_StaticMethods_initModules$$(this.$_container$);
+  this.$_initActions$()
 };
 $tuna$control$ViewController$$.prototype.$destroy$ = function $$tuna$control$ViewController$$$$$destroy$$() {
   this.$_container$ !== $JSCompiler_alias_NULL$$ && ($JSCompiler_StaticMethods_destroyModules$$(this.$_container$), this.$_container$ = $JSCompiler_alias_NULL$$)
 };
+$tuna$control$ViewController$$.prototype.$_initActions$ = $JSCompiler_emptyFn$$();
 function $tuna$control$PageViewController$$() {
   $tuna$control$ViewController$$.call(this)
 }
@@ -1711,8 +1728,18 @@ window.main = function $window$main$($body$$1$$) {
 };
 function $MainController$$() {
   $tuna$control$ViewController$$.call(this);
-  this.$_modules$ = ["popup"]
+  this.$_modules$ = ["form", "button"]
 }
 $tuna$utils$extend$$($MainController$$, $tuna$control$ViewController$$);
+$MainController$$.prototype.$_initActions$ = function $$MainController$$$$$_initActions$$() {
+  var $addTaskForm$$ = $JSCompiler_StaticMethods_getModuleInstanceByName$$(this.$_container$, "form", "add-task");
+  $addTaskForm$$.addEventListener("submit", function($event$$30$$) {
+    alert("Task: " + $addTaskForm$$.$getValue$("task"));
+    $event$$30$$.preventDefault()
+  });
+  $JSCompiler_StaticMethods_getModuleInstanceByName$$(this.$_container$, "button", "remove-done-tasks").addEventListener("click", function() {
+    alert("ghkjk")
+  })
+};
 $tuna$control$__mainController$$ = new $MainController$$;
 

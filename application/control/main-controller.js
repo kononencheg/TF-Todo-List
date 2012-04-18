@@ -11,21 +11,32 @@ var MainController = function() {
     tuna.control.ViewController.call(this);
 
     /**
-     * Список модулей-компонентов отображения, которые необходимо
-     * проинициализировать в контейнере соответствующему данному контроллеру
-     * отображения.
-     *
-     * Основному контроллеру отображения соотвествует базовый узел страницы
-     * приложения.
-     *
-     * @type {!Array.<string>}
-     * @protected
+     * @inheritDoc
      */
-    this._modules = [ 'popup' ];
+    this._modules = [ 'form', 'button' ];
 };
 
 tuna.utils.extend(MainController, tuna.control.ViewController);
 
-// Установка экземпляра класса <code>MainController</code> как основного
-// контроллера отображения.
+/**
+ * @inheritDoc
+ */
+MainController.prototype._initActions = function() {
+    var addTaskForm =
+        this._container.getModuleInstanceByName('form', 'add-task');
+
+    addTaskForm.addEventListener('submit', function(event) {
+        alert('Задание: ' + addTaskForm.getValue('task'));
+
+        event.preventDefault();
+    });
+
+    var removeDoneTasksButton =
+        this._container.getModuleInstanceByName('button', 'remove-done-tasks');
+
+    removeDoneTasksButton.addEventListener('click', function() {
+        alert('Ура!');
+    });
+};
+
 tuna.control.setMainController(new MainController());
