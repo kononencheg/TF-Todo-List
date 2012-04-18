@@ -1756,7 +1756,10 @@ $MainController$$.prototype.$_initActions$ = function $$MainController$$$$$_init
     $event$$30$$.preventDefault()
   });
   $JSCompiler_StaticMethods_getModuleInstanceByName$$(this.$_container$, "button", "remove-done-tasks").addEventListener("click", function() {
-    alert("\u0423\u0440\u0430!")
+    for(var $i$$46$$ = $self$$12$$.$__tasksList$.length - 1;0 <= $i$$46$$;) {
+      $self$$12$$.$__tasksList$[$i$$46$$].isDone === $JSCompiler_alias_TRUE$$ && $self$$12$$.$__tasksList$.splice($i$$46$$, 1), $i$$46$$--
+    }
+    $JSCompiler_StaticMethods___updateView$$($self$$12$$)
   });
   var $taskControls$$ = $JSCompiler_StaticMethods_getModuleInstanceByName$$(this.$_container$, "button-group", "task-controls");
   $taskControls$$.addEventListener("done", function($event$$31$$, $button$$5$$) {
@@ -1772,7 +1775,10 @@ $MainController$$.prototype.$_initActions$ = function $$MainController$$$$$_init
   $JSCompiler_StaticMethods___updateView$$(this)
 };
 function $JSCompiler_StaticMethods___updateView$$($JSCompiler_StaticMethods___updateView$self$$) {
-  $JSCompiler_StaticMethods_applyTransform$$($JSCompiler_StaticMethods___updateView$self$$.$__todoListTransformer$, {list:$JSCompiler_StaticMethods___updateView$self$$.$__tasksList$})
+  for(var $doneCount$$ = 0, $i$$47$$ = $JSCompiler_StaticMethods___updateView$self$$.$__tasksList$.length - 1;0 <= $i$$47$$;) {
+    $JSCompiler_StaticMethods___updateView$self$$.$__tasksList$[$i$$47$$].isDone === $JSCompiler_alias_TRUE$$ && $doneCount$$++, $i$$47$$--
+  }
+  $JSCompiler_StaticMethods_applyTransform$$($JSCompiler_StaticMethods___updateView$self$$.$__todoListTransformer$, {list:$JSCompiler_StaticMethods___updateView$self$$.$__tasksList$, doneCount:$doneCount$$, newCount:$JSCompiler_StaticMethods___updateView$self$$.$__tasksList$.length - $doneCount$$})
 }
 $tuna$control$__mainController$$ = new $MainController$$;
 

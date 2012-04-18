@@ -64,7 +64,16 @@ MainController.prototype._initActions = function() {
         this._container.getModuleInstanceByName('button', 'remove-done-tasks');
 
     removeDoneTasksButton.addEventListener('click', function() {
-        alert('Ура!');
+        var i = self.__tasksList.length - 1;
+        while (i >= 0) {
+            if (self.__tasksList[i]['isDone'] === true) {
+                self.__tasksList.splice(i, 1);
+            }
+            
+            i--;
+        }
+    
+        self.__updateView();
     });
 
     var taskControls =
@@ -92,8 +101,20 @@ MainController.prototype._initActions = function() {
  * @private
  */
 MainController.prototype.__updateView = function() {
+    var doneCount = 0;
+    var i = this.__tasksList.length - 1;
+    while (i >= 0) {
+        if (this.__tasksList[i]['isDone'] === true) {
+            doneCount++;
+        }
+        
+        i--;
+    }
+    
     this.__todoListTransformer.applyTransform({
-        'list': this.__tasksList
+        'list': this.__tasksList,
+        'doneCount': doneCount,
+        'newCount': this.__tasksList.length - doneCount
     });
 };
 

@@ -29,8 +29,8 @@
                  data-name="todo-list"
                  data-template-id="todo_list_template">
 
-                <div class="alert alert-error">
-                    Осталось задач: <strong>3</strong>
+                <div class="t-list-state alert alert-error">
+                    Осталось задач: <strong class="t-new-count">3</strong>
                 </div>
 
                 <ul class="j-button-group t-list nav nav-list"
@@ -39,7 +39,7 @@
                 <hr />
 
                 <button class="j-button btn" data-name="remove-done-tasks">
-                    Удалить выполненные (<span>0</span>)
+                    Удалить выполненные (<span class="t-done-count">0</span>)
                 </button>
             </div>
 
@@ -53,12 +53,23 @@
                 <tuna:if tuna:target=".t-list-body"
                          tuna:path="list/length" tuna:eq="0"
                          tuna:class="hide" />
+                
+                <tuna:if tuna:target=".t-list-state"
+                         tuna:path="newCount" tuna:ne="0"
+                         tuna:class="alert-error" />
+                
+                <tuna:if tuna:target=".t-list-state"
+                         tuna:path="newCount" tuna:eq="0"
+                         tuna:class="alert-success" />
 
                 <tuna:list tuna:target=".t-list"
                            tuna:path="list"
                            tuna:item-renderer-id="task_renderer"
                            tuna:item-template-id="task_template"
                            tuna:key-path="$key" />
+                
+                <tuna:spot tuna:target=".t-new-count" tuna:path="newCount" />
+                <tuna:spot tuna:target=".t-done-count" tuna:path="doneCount" />
 
             </tuna:template>
 
