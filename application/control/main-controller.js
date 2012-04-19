@@ -60,6 +60,19 @@ MainController.prototype._initActions = function() {
         event.preventDefault();
     });
 
+    var allDoneButton =
+        this._container.getModuleInstanceByName('button', 'all-done');
+
+    allDoneButton.addEventListener('click', function() {
+        var i = self.__tasksList.length - 1;
+        while (i >= 0) {
+            self.__tasksList[i]['isDone'] = true;
+            i--;
+        }
+
+        self.__updateView();
+    });
+
     var removeDoneTasksButton =
         this._container.getModuleInstanceByName('button', 'remove-done-tasks');
 

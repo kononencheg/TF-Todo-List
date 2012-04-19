@@ -1755,9 +1755,15 @@ $MainController$$.prototype.$_initActions$ = function $$MainController$$$$$_init
     }
     $event$$30$$.preventDefault()
   });
-  $JSCompiler_StaticMethods_getModuleInstanceByName$$(this.$_container$, "button", "remove-done-tasks").addEventListener("click", function() {
+  $JSCompiler_StaticMethods_getModuleInstanceByName$$(this.$_container$, "button", "all-done").addEventListener("click", function() {
     for(var $i$$46$$ = $self$$12$$.$__tasksList$.length - 1;0 <= $i$$46$$;) {
-      $self$$12$$.$__tasksList$[$i$$46$$].isDone === $JSCompiler_alias_TRUE$$ && $self$$12$$.$__tasksList$.splice($i$$46$$, 1), $i$$46$$--
+      $self$$12$$.$__tasksList$[$i$$46$$].isDone = $JSCompiler_alias_TRUE$$, $i$$46$$--
+    }
+    $JSCompiler_StaticMethods___updateView$$($self$$12$$)
+  });
+  $JSCompiler_StaticMethods_getModuleInstanceByName$$(this.$_container$, "button", "remove-done-tasks").addEventListener("click", function() {
+    for(var $i$$47$$ = $self$$12$$.$__tasksList$.length - 1;0 <= $i$$47$$;) {
+      $self$$12$$.$__tasksList$[$i$$47$$].isDone === $JSCompiler_alias_TRUE$$ && $self$$12$$.$__tasksList$.splice($i$$47$$, 1), $i$$47$$--
     }
     $JSCompiler_StaticMethods___updateView$$($self$$12$$)
   });
@@ -1775,8 +1781,8 @@ $MainController$$.prototype.$_initActions$ = function $$MainController$$$$$_init
   $JSCompiler_StaticMethods___updateView$$(this)
 };
 function $JSCompiler_StaticMethods___updateView$$($JSCompiler_StaticMethods___updateView$self$$) {
-  for(var $doneCount$$ = 0, $i$$47$$ = $JSCompiler_StaticMethods___updateView$self$$.$__tasksList$.length - 1;0 <= $i$$47$$;) {
-    $JSCompiler_StaticMethods___updateView$self$$.$__tasksList$[$i$$47$$].isDone === $JSCompiler_alias_TRUE$$ && $doneCount$$++, $i$$47$$--
+  for(var $doneCount$$ = 0, $i$$48$$ = $JSCompiler_StaticMethods___updateView$self$$.$__tasksList$.length - 1;0 <= $i$$48$$;) {
+    $JSCompiler_StaticMethods___updateView$self$$.$__tasksList$[$i$$48$$].isDone === $JSCompiler_alias_TRUE$$ && $doneCount$$++, $i$$48$$--
   }
   $JSCompiler_StaticMethods_applyTransform$$($JSCompiler_StaticMethods___updateView$self$$.$__todoListTransformer$, {list:$JSCompiler_StaticMethods___updateView$self$$.$__tasksList$, doneCount:$doneCount$$, newCount:$JSCompiler_StaticMethods___updateView$self$$.$__tasksList$.length - $doneCount$$})
 }

@@ -6,6 +6,9 @@
         <title>Список задач</title>
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+        <style type="text/css">
+            a { cursor: pointer }
+        </style>
     </head>
     <body>
 
@@ -31,16 +34,19 @@
 
                 <div class="t-list-state alert alert-error">
                     Осталось задач: <strong class="t-new-count">3</strong>
+                    (<a class="j-button"
+                        data-name="all-done">всё сделано</a>)
                 </div>
 
                 <ul class="j-button-group t-list nav nav-list"
                     data-name="task-controls"></ul>
 
-                <hr />
-
-                <button class="j-button btn" data-name="remove-done-tasks">
-                    Удалить выполненные (<span class="t-done-count">0</span>)
-                </button>
+                <div class="t-done-control">
+                    <hr />
+                    <button class="j-button btn" data-name="remove-done-tasks">
+                        Удалить выполненные (<span class="t-done-count">0</span>)
+                    </button>
+                </div>
             </div>
 
         </div>
@@ -57,10 +63,14 @@
                 <tuna:if tuna:target=".t-list-state"
                          tuna:path="newCount" tuna:ne="0"
                          tuna:class="alert-error" />
-                
+
                 <tuna:if tuna:target=".t-list-state"
                          tuna:path="newCount" tuna:eq="0"
                          tuna:class="alert-success" />
+
+                <tuna:if tuna:target=".t-done-control"
+                         tuna:path="doneCount" tuna:eq="0"
+                         tuna:class="hide" />
 
                 <tuna:list tuna:target=".t-list"
                            tuna:path="list"
