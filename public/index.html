@@ -8,6 +8,7 @@
         <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
         <style type="text/css">
             a { cursor: pointer }
+            .done-task { text-decoration: line-through }
         </style>
     </head>
     <body>
@@ -34,14 +35,16 @@
 
                 <div class="t-list-state alert alert-error">
                     Осталось задач: <strong class="t-new-count">3</strong>
-                    (<a class="j-button"
-                        data-name="all-done">всё сделано</a>)
+                    <span class="t-new-controls">
+                        (<a class="j-button"
+                            data-name="all-done">всё сделано</a>)
+                    </span>
                 </div>
 
                 <ul class="j-button-group t-list nav nav-list"
                     data-name="task-controls"></ul>
 
-                <div class="t-done-control">
+                <div class="t-done-controls">
                     <hr />
                     <button class="j-button btn" data-name="remove-done-tasks">
                         Удалить выполненные (<span class="t-done-count">0</span>)
@@ -56,6 +59,11 @@
         <div class="j-isolator hide">
 
             <tuna:template id="todo_list_template">
+
+                <tuna:spot tuna:target=".t-new-count" tuna:path="newCount" />
+
+                <tuna:spot tuna:target=".t-done-count" tuna:path="doneCount" />
+
                 <tuna:if tuna:target=".t-list-body"
                          tuna:path="list/length" tuna:eq="0"
                          tuna:class="hide" />
@@ -68,8 +76,12 @@
                          tuna:path="newCount" tuna:eq="0"
                          tuna:class="alert-success" />
 
-                <tuna:if tuna:target=".t-done-control"
+                <tuna:if tuna:target=".t-done-controls"
                          tuna:path="doneCount" tuna:eq="0"
+                         tuna:class="hide" />
+
+                <tuna:if tuna:target=".t-new-controls"
+                         tuna:path="newCount" tuna:eq="0"
                          tuna:class="hide" />
 
                 <tuna:list tuna:target=".t-list"
@@ -77,34 +89,36 @@
                            tuna:item-renderer-id="task_renderer"
                            tuna:item-template-id="task_template"
                            tuna:key-path="$key" />
-                
-                <tuna:spot tuna:target=".t-new-count" tuna:path="newCount" />
-                <tuna:spot tuna:target=".t-done-count" tuna:path="doneCount" />
 
             </tuna:template>
 
             <tuna:template id="task_template">
+
                 <tuna:spot tuna:target=".t-task-text" tuna:path="text" />
+
                 <tuna:checkbox tuna:target=".t-is-task-done" tuna:path="isDone" />
 
                 <tuna:attr tuna:name="data-task-index"
                            tuna:target=".t-key-data"
                            tuna:path="$key" />
+
+                <tuna:if tuna:target=".t-task-text"
+                         tuna:path="isDone" tuna:eq="true"
+                         tuna:class="done-task" />
+
             </tuna:template>
 
             <ul>
                 <li id="task_renderer">
                     <a class="clearfix">
                         <label class="j-button t-key-data checkbox pull-left"
-                               data-action="done"
-                               data-task-index="">
+                               data-action="done">
 
                             <input type="checkbox" class="t-is-task-done" />
                             <span class="t-task-text"></span>
                         </label>
                         <i class="j-button t-key-data icon-trash pull-right"
-                           data-action="remove"
-                           data-task-index=""></i>
+                           data-action="remove"></i>
                     </a>
                 </li>
             </ul>
@@ -118,6 +132,8 @@
 
         <script type="text/javascript" src="js/sizzle.js"></script>
         <script type="text/javascript" src="js/app.js"></script>
+        <script type="text/javascript" src="js/main-controller.js"></script>
+        <script type="text/javascript" src="js/main.js"></script>
 
         <script type="text/javascript">
             main(document.body);

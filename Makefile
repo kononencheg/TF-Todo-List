@@ -10,7 +10,7 @@
 
 JS_COMPILER = java -jar utils/compiler.jar \
 			  --warning_level VERBOSE \
-			  --compilation_level ADVANCED_OPTIMIZATIONS \
+			  --compilation_level WHITESPACE_ONLY \
 			  --externs library/externs.js \
 			  --formatting PRETTY_PRINT \
 			  --debug \
@@ -64,8 +64,8 @@ TUNA_FILES = tuna.js \
              \
              tmpl/units/list/i-list-item-router.js \
              tmpl/units/list/list-container-router.js \
-             tmpl/units/condition/class-action.js \
              tmpl/units/condition/condition-action.js \
+             tmpl/units/condition/class-action.js \
              tmpl/units/condition/condition-operator.js \
              tmpl/units/condition/equals-operator.js \
              tmpl/units/condition/isset-operator.js \
